@@ -21,19 +21,25 @@
 
                 socket.on('move', function (data) {
                     var $userDiv = $('#' + data.user);
+                    console.log(data.user + ', ' + data.x + ', ' + data.y);
+
                     if($userDiv.length) {
-                        $userDiv.css({
-                            left: data.x,
-                            top: data.y
-                        });
+                        console.log('  div exists');
                     } else {
-                        var $div = $('<div></div>', {
+                        console.log('  div not there');
+
+                        var $userDiv = $('<div></div>', {
                             id: data.user,
                             class: 'pointer'
                         });
 
-                        $('body').append($div);
+                        $('body').append($userDiv);
                     }
+
+                    $userDiv.css({
+                        left: data.x,
+                        top: data.y
+                    });
                 });
 
                 socket.on('update_count', function (count) {
